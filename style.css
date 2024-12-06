@@ -9,7 +9,6 @@
     z-index: 1000; 
     border-radius: 5px;
 }
-
 .favori-red {
     background-color: #FF0000; 
     color: white; 
@@ -21,52 +20,52 @@
     z-index: 1000; 
     border-radius: 5px;
 }
-
 .product-container {
-    display: flex;
-    justify-content: center;
+    display: flex; 
     align-items: center;
+    justify-content: flex-start;
     margin: 20px auto;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 1200px; 
+    max-width: 700px; 
     width: 100%; 
     position: relative;
 }
-
 .product-container:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
 .product-image {
     width: 200px;
     height: 200px;
     margin-right: 20px;
 }
-
 .product-info {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
 }
-
-.product-info b {
-    display: block;
-    margin-bottom: 5px;
+.product-info b{
+  margin-bottom: 2px;
 }
-
+.product-detail {
+    display: flex; 
+    align-items: center; 
+}
 .action-buttons {
     display: flex;
-    justify-content: flex-end; 
+    flex-direction: column;
+    justify-content: flex-start; 
     align-items: center;
-    margin-top: 10px;
 }
-
 .like-btn {
     position: absolute;
-    bottom: 5px; 
-    left: 210px;  
+    top:10px;
+    right:10px;
     border: none;
     background: none;
     cursor: pointer;
@@ -74,31 +73,27 @@
     border-radius: 50%;
     transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .sepet-btn {
+    margin-top: 75%;
     border: none;
     background: none;
     cursor: pointer;
-    margin: 25px;
     padding: 10px;
     border-radius: 50%;
     transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .like-btn img, .sepet-btn img {
     width: 50px;
     height: 50px;
 }
-
 .like-btn:hover, .sepet-btn:hover {
-    transform: scale(0.8);
+    transform: scale(0.9);
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
-
 .quantity-input {
+    margin-top: 75%;
     width: 70px;
     height: 35px;
-    margin-right: 10px;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;

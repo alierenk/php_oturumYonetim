@@ -42,14 +42,16 @@ if($_SESSION["tur"]=='kullanici' || $_SESSION["tur"]=='admin')
         $urun_adi =$row['ad'];
         $urun_adet =$row['adet'];
         $urun_foto =$row['foto'];
+        $urun_fiyat =$row['fiyat'];
     
         echo "
                 <div class='product-container'>
                     <img src='$urun_foto' class='product-image' alt='Ürün Fotoğrafı'>
                     <div class='product-info'>
-                        <b>Serino:</b> $urun_serino<br>
-                        <b>Adı:</b> $urun_adi<br> 
-                        <b>Adet:</b> $urun_adet<br><br>&nbsp;
+                        <div class='product-detail'><b>Serino:</b> $urun_serino</div>
+                        <div class='product-deatil'><b>Adı:</b> $urun_adi</div>
+                        <div class='product-detail'><b>Adet:</b> $urun_adet</div>
+                        <div class='product-detail'><b>Fiyat:</b> $urun_fiyat</div>
                     </div>
                     <div class='action-buttons'>
                         <form action='favoriEkle.php' method='POST'>
