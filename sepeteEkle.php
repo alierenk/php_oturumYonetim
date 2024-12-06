@@ -14,7 +14,7 @@ $kullanici_id =$_SESSION['kullanici_id'];
 $adet = $_POST['adet'];
 
 
-if($urun_id && $kullanici_id &&$adet){
+if($urun_id && $kullanici_id &&isset($adet) && $adet > 0){
 
     $db = new PDO("mysql:host=localhost;dbname=ali_oturum", 'root', '');
 
@@ -23,7 +23,6 @@ if($urun_id && $kullanici_id &&$adet){
     $stok_adet = $urun['adet'];
 
     if ($adet > $stok_adet) {
-        // Stokta yeterli ürün yoksa
         $_SESSION['favori_red'] = "Stokta yeterli ürün bulunmamaktadır!";
         header("Location: kullanici.php"); 
         exit();
@@ -32,39 +31,23 @@ if($urun_id && $kullanici_id &&$adet){
     {
         $kontrol = $db->query("SELECT * FROM sepet WHERE kullanici_id =$kullanici_id and urun_id = $urun_id");
         $sepet_kontrol = $kontrol->fetch(PDO::FETCH_ASSOC);
-        
-        
-    
         if(!$sepet_kontrol)
         {
-            $sepetekle = $db->query("INSERT INTO sepet(kullanici_id,urun_id,sepet_adet) VALUES ($kullanici_id,$urun_id,1)");
-            $_SESSION['favori_mesaj'] = "Ürün Sepetinize Eklendi";       
+            $sepetekle = $db->query("INSERT INTO sepet (kullanici_id, urun_id, sepet_adet) VALUES ($kullanici_id, $urun_id, $adet)");
+            $_SESSION['favori_mesaj'] = "Ürün Sepetinize Eklendi"; 
+
+            $stoktan_dus =$db->query("UPDATE urunler SET adet = adet - $adet WHERE urun_id = $urun_id");      
         }
         else
         {
-            $sepetekle = $db->query("UPDATE sepet SET sepet_adet = sepet_adet + 1 WHERE kullanici_id = $kullanici_id AND urun_id = $urun_id");
+            $sepetekle = $db->query("UPDATE sepet SET sepet_adet = sepet_adet + $adet WHERE kullanici_id = $kullanici_id AND urun_id = $urun_id");
             $_SESSION['favori_mesaj'] = "Sepetteki Ürünün Adedi Arttırıldı!";
+            $stoktan_dus =$db->query("UPDATE urunler SET adet = adet - $adet WHERE urun_id = $urun_id");  
         }
     }  
 }
 header("Location: kullanici.php");
 exit();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

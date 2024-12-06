@@ -81,14 +81,14 @@ if($_SESSION["tur"]=='kullanici' || $_SESSION["tur"]=='admin')
                     </button>
                 </form>
                 
-        
                 
                 <form action ='sepeteEkle.php' method='POST'style='display: flex; align-items: center;'>
                 <input type='hidden' name='urun_id' value='$urun_id'>
+                <input type='number' name='adet' style='height: 25px; width: 40px; margin-right: 1px; min='1' value='1''>
                 <button type='submit' style='border: none; background: none; cursor: pointer;'>
                     <img src='sepet.png' alt='Favori' style='height:45px;width:45px;'>
                     </button>
-                    <input type='number' name='adet' style='height: 20px; width: 40px; margin-right: 10px;'>
+                    
                 </form>
             </td>
         </tr>
