@@ -11,32 +11,42 @@ session_start();
 
 $urun_id =$_POST['urun_id'];
 $kullanici_id =$_SESSION['kullanici_id'];
+$adet = $_POST['adet'];
 
 
-if($urun_id && $kullanici_id){
+if($urun_id && $kullanici_id &&$adet){
 
     $db = new PDO("mysql:host=localhost;dbname=ali_oturum", 'root', '');
 
-    $kontrol = $db->query("SELECT * FROM sepet WHERE kullanici_id =$kullanici_id and urun_id = $urun_id");
-    $sepet_kontrol = $kontrol->fetch(PDO::FETCH_ASSOC);
-    
-    
+    $urun_sorgu = $db->query("SELECT * FROM urunler WHERE urun_id =$urun_id");
+    $urun = $urun_sorgu->fetch(PDO::FETCH_ASSOC);
+    $stok_adet = $urun['adet'];
 
-    if(!$sepet_kontrol)
-    {
-        $sepetekle = $db->query("INSERT INTO sepet(kullanici_id,urun_id,sepet_adet) VALUES ($kullanici_id,$urun_id,1)");
-        $_SESSION['favori_mesaj'] = "Ürün Sepetinize Eklendi";       
+    if ($adet > $stok_adet) {
+        // Stokta yeterli ürün yoksa
+        $_SESSION['favori_red'] = "Stokta yeterli ürün bulunmamaktadır!";
+        header("Location: kullanici.php"); 
+        exit();
     }
     else
     {
-        $sepetekle = $db->query("UPDATE sepet SET sepet_adet = sepet_adet + 1 WHERE kullanici_id = $kullanici_id AND urun_id = $urun_id");
-        $_SESSION['favori_mesaj'] = "Sepetteki Ürünün Adedi Arttırıldı!";
-    }
+        $kontrol = $db->query("SELECT * FROM sepet WHERE kullanici_id =$kullanici_id and urun_id = $urun_id");
+        $sepet_kontrol = $kontrol->fetch(PDO::FETCH_ASSOC);
+        
+        
     
-    
-    
+        if(!$sepet_kontrol)
+        {
+            $sepetekle = $db->query("INSERT INTO sepet(kullanici_id,urun_id,sepet_adet) VALUES ($kullanici_id,$urun_id,1)");
+            $_SESSION['favori_mesaj'] = "Ürün Sepetinize Eklendi";       
+        }
+        else
+        {
+            $sepetekle = $db->query("UPDATE sepet SET sepet_adet = sepet_adet + 1 WHERE kullanici_id = $kullanici_id AND urun_id = $urun_id");
+            $_SESSION['favori_mesaj'] = "Sepetteki Ürünün Adedi Arttırıldı!";
+        }
+    }  
 }
-
 header("Location: kullanici.php");
 exit();
 
