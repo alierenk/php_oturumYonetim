@@ -1,0 +1,62 @@
+<a href="cikis.php">Oturumu kapat</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="kullanici.php">Kullanici sayfasına dön</a>
+<br><br>
+
+
+<?php
+
+
+
+session_start();
+
+$urun_id =$_POST['urun_id'];
+$kullanici_id =$_SESSION['kullanici_id'];
+
+
+if($urun_id && $kullanici_id){
+
+    $db = new PDO("mysql:host=localhost;dbname=ali_oturum", 'root', '');
+
+    $kontrol = $db->query("SELECT * FROM sepet WHERE kullanici_id =$kullanici_id and urun_id = $urun_id");
+    $sepet_kontrol = $kontrol->fetch(PDO::FETCH_ASSOC);
+    
+    
+
+    if(!$sepet_kontrol)
+    {
+        $sepetekle = $db->query("INSERT INTO sepet(kullanici_id,urun_id,sepet_adet) VALUES ($kullanici_id,$urun_id,1)");
+        $_SESSION['favori_mesaj'] = "Ürün Sepetinize Eklendi";       
+    }
+    else
+    {
+        $sepetekle = $db->query("UPDATE sepet SET sepet_adet = sepet_adet + 1 WHERE kullanici_id = $kullanici_id AND urun_id = $urun_id");
+        $_SESSION['favori_mesaj'] = "Sepetteki Ürünün Adedi Arttırıldı!";
+    }
+    
+    
+    
+}
+
+header("Location: kullanici.php");
+exit();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
+
