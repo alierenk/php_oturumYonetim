@@ -1,0 +1,105 @@
+.favori-mesaj {
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 15px; 
+    position: fixed; 
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 1000; 
+    border-radius: 5px;
+}
+
+.favori-red {
+    background-color: #FF0000; 
+    color: white; 
+    padding: 15px; 
+    position: fixed; 
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 1000; 
+    border-radius: 5px;
+}
+
+.product-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px; 
+    width: 100%; 
+    position: relative;
+}
+
+.product-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-info b {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    margin-top: 10px;
+}
+
+.like-btn {
+    position: absolute;
+    bottom: 5px; 
+    left: 210px;  
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sepet-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 25px;
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.like-btn img, .sepet-btn img {
+    width: 50px;
+    height: 50px;
+}
+
+.like-btn:hover, .sepet-btn:hover {
+    transform: scale(0.8);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.quantity-input {
+    width: 70px;
+    height: 35px;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

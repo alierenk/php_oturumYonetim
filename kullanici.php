@@ -1,30 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="tr">
     <head>
         <title>Kullanıcı Sayfası</title> 
-        <style>
-            .favori-mesaj{
-            background-color: #4CAF50; 
-            color: white; 
-            padding: 15px; 
-            position: fixed; 
-            bottom: 20px; 
-            left: 50%;
-            transform: translateX(-50%); 
-            z-index: 1000; 
-            border-radius: 5px
-            }
-            .favori-red{
-            background-color: #FF0000; 
-            color: white; 
-            padding: 15px; 
-            position: fixed; 
-            bottom: 20px; 
-            left: 50%;
-            transform: translateX(-50%); 
-            z-index: 1000; 
-            border-radius: 5px
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
     </head>
 
     <a href="cikis.php">Oturumu kapat</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -65,34 +43,31 @@ if($_SESSION["tur"]=='kullanici' || $_SESSION["tur"]=='admin')
         $urun_adet =$row['adet'];
         $urun_foto =$row['foto'];
     
-        echo "<table align='center' border='1'>
-        <tr>
-            <td>
-                <img src='$urun_foto' style='height:200px;width:200px'><br>
-            </td>
-            <td>
-                <b>Serino:</b> $urun_serino<br>
-                <b>Adı:</b> $urun_adi<br> 
-                <b>Adet:</b> $urun_adet<br><br>&nbsp;
-                <form action='favoriEkle.php' method='POST'>
-                    <input type='hidden' name='urun_id' value='$urun_id'>   
-                    <button type='submit' style='border: none; background: none; cursor: pointer;'>
-                    <img src='like.png' alt='Favori' style='height:50px;width:50px;'>
-                    </button>
-                </form>
-                
-                
-                <form action ='sepeteEkle.php' method='POST'style='display: flex; align-items: center;'>
-                <input type='hidden' name='urun_id' value='$urun_id'>
-                <input type='number' name='adet' style='height: 25px; width: 40px; margin-right: 1px; min='1' value='1''>
-                <button type='submit' style='border: none; background: none; cursor: pointer;'>
-                    <img src='sepet.png' alt='Favori' style='height:45px;width:45px;'>
-                    </button>
-                    
-                </form>
-            </td>
-        </tr>
-        </table>"; 
+        echo "
+                <div class='product-container'>
+                    <img src='$urun_foto' class='product-image' alt='Ürün Fotoğrafı'>
+                    <div class='product-info'>
+                        <b>Serino:</b> $urun_serino<br>
+                        <b>Adı:</b> $urun_adi<br> 
+                        <b>Adet:</b> $urun_adet<br><br>&nbsp;
+                    </div>
+                    <div class='action-buttons'>
+                        <form action='favoriEkle.php' method='POST'>
+                            <input type='hidden' name='urun_id' value='$urun_id'>   
+                            <button type='submit' class='like-btn'>
+                                <img src='like.png' alt='Favori'>
+                            </button>
+                        </form>
+                        
+                        <form action='sepeteEkle.php' method='POST' style='display: flex; align-items: center;'>
+                            <input type='hidden' name='urun_id' value='$urun_id'>
+                            <input type='number' name='adet' class='quantity-input' min='1' value='1'>
+                            <button type='submit' class='sepet-btn'>
+                                <img src='sepet.png' alt='Sepet'>
+                            </button>
+                        </form>
+                    </div>
+                </div>"; 
     }
 }
 else
