@@ -26,7 +26,7 @@ if ($urun_id && $kullanici_id) {
         $_SESSION['favori_mesaj'] = "Ürün Başarıyla Sepetinizden Kaldırıldı";
     }
 }
-header("Location: kullanici.php");
+header("Location: sepet.php");
 exit();
 
 ?>

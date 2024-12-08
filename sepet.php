@@ -31,7 +31,7 @@ if (count($sepeturunler) > 0)
             echo "<tr>            
                 <td>{$urun['ad']}</td>
                 <td>{$urun['sepet_adet']}</td>
-                <td><img src='{$urun['foto']}' style='height:100px;width:100px;'></td>
+                <td><img src='urunler/{$urun['foto']}' style='height:100px;width:100px;'></td>
                 <td>
                 <a href='sepetSil.php?urun_id={$urun['urun_id']}'>Sepetimden çıkar</a>
                 </td>

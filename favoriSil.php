@@ -17,7 +17,7 @@ if($i == 0){
         }
         
 }
-header("Location: kullanici.php");
+header("Location: favoriler.php");
 exit();
 
 ?>

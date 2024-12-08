@@ -46,7 +46,7 @@ if($_SESSION["tur"]=='kullanici' || $_SESSION["tur"]=='admin')
     
         echo "
                 <div class='product-container'>
-                    <img src='$urun_foto' class='product-image' alt='Ürün Fotoğrafı'>
+                    <img src='urunler/$urun_foto' class='product-image' alt='Ürün Fotoğrafı'>
                     <div class='product-info'>
                         <div class='product-detail'><b>Serino:</b> $urun_serino</div>
                         <div class='product-deatil'><b>Adı:</b> $urun_adi</div>
