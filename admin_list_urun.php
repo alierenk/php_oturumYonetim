@@ -30,7 +30,7 @@ if($_SESSION["tur"]=='admin')
                 <td>{$urun['serino']}</td>
                 <td>{$urun['ad']}</td>
                 <td>{$urun['adet']}</td>
-                <td><img src='{$urun['foto']}' style='height:100px;width:100px;'></td>
+                <td><img src='urunler/{$urun['foto']}' style='height:100px;width:100px;'></td>
             </tr>";
   
         }     

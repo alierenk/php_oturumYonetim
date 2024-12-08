@@ -35,9 +35,17 @@ echo "<table align='center' border='0'>
         Ürünleri görmek için 
     </td>
     <td>
-    <a href='admin_list_urun.php'>Tıklayınız</a>
+        <a href='admin_list_urun.php'>Tıklayınız</a>
     </td>
     </tr>
+    <tr>
+    <td>
+        Stok kontrol paneli için
+    </td>
+    <td>
+        <a href='stok_kontrol.php'>Tıklayınız</a>
+    </td>
+    </tr>  
 </table>";
 }
 else
@@ -45,6 +53,4 @@ else
     header('location:giris.php');
     exit;
 }
-
-
 ?>
