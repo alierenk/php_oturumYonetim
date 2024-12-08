@@ -57,7 +57,7 @@ if($_SESSION["tur"]=='kullanici' || $_SESSION["tur"]=='admin')
                         <form action='favoriEkle.php' method='POST'>
                             <input type='hidden' name='urun_id' value='$urun_id'>   
                             <button type='submit' class='like-btn'>
-                                <img src='like.png' alt='Favori'>
+                                <img src='imgs/like.png' alt='Favori'>
                             </button>
                         </form>
                         
@@ -65,7 +65,7 @@ if($_SESSION["tur"]=='kullanici' || $_SESSION["tur"]=='admin')
                             <input type='hidden' name='urun_id' value='$urun_id'>
                             <input type='number' name='adet' class='quantity-input' min='1' value='1'>
                             <button type='submit' class='sepet-btn'>
-                                <img src='sepet.png' alt='Sepet'>
+                                <img src='imgs/sepet.png' alt='Sepet'>
                             </button>
                         </form>
                     </div>
