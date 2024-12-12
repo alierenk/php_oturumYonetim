@@ -53,7 +53,7 @@ if($_SESSION["tur"]=='kullanici' || $_SESSION["tur"]=='admin')
                         <div class='product-detail'><b>Adet:</b> $urun_adet</div>
                         <div class='product-detail'><b>Fiyat:</b> $urun_fiyat</div>
                     </div>
-                    <div class='action-buttons'>
+                    <div class='action-buttons-kullanici'>
                         <form action='favoriEkle.php' method='POST'>
                             <input type='hidden' name='urun_id' value='$urun_id'>   
                             <button type='submit' class='like-btn'>

@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
 <a href="cikis.php">Oturumu kapat</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="kullanici.php">Kullanici sayfasına dön</a>
 <br><br>
@@ -20,23 +26,50 @@ if (count($sepeturunler) > 0)
     echo "<table align='center' border='1'>
 
         <tr>
-            <td>Adı</td>
+            <td>Ürün</td>
+            <td>Fiyat</td>
             <td>Adet</td>
-            <td>Fotoğraf</td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Toplam Tutar</td>
         </tr>";
  
         foreach ($sepeturunler as $urun) 
         {
             echo "<tr>            
-                <td>{$urun['ad']}</td>
-                <td>{$urun['sepet_adet']}</td>
-                <td><img src='urunler/{$urun['foto']}' style='height:100px;width:100px;'></td>
-                <td>
-                <a href='sepetSil.php?urun_id={$urun['urun_id']}'>Sepetimden çıkar</a>
-                </td>
+            <td>
+            <div class='.action-buttons-sepet' style='display: flex; align-items: center; padding: 10px;'>
+            <form action='' method='POST' style='display: flex; align-items:center; margin-right: 10px;'>
+                <input type='hidden' name='urun_id' value=''>   
+                <button type='submit' class='sepet_sil-btn'>
+                    <img src='imgs/sepet_sil.png' alt='sepet_sil-btn'>
+                </button>
+            </form>
+
+            <div style='display: flex; align-items: center;'>
+                <img src='urunler/{$urun['foto']}' style='height:100px;width:100px;'>
+                <div style='display: flex; justify-content: left; align-items: center; height:100px; width: 250px; text-align: center; margin-left: 30px;'>
+                    {$urun['ad']}
+                </div>
+            </div>
+        </div>
+         </td>
+            <td>
+                {$urun['fiyat']}
+            </td>
+            <td>
+                <form action='' method='POST'>
+                        <input type='submit' name='azalt' value='-'>
+                        <input type='number' name='stok_ekle' value='{$urun['sepet_adet']}' style='width:50px'>
+                        <input type='hidden' name='urun_id' value='{$urun['urun_id']}'>
+                        <input type='submit' name='ekle' value='+'>
+                </form>
+            </td>
             </tr>";
   
         }
-}    
+} 
+
+
 ?>
+</html>
+
+
