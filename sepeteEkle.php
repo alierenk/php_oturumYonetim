@@ -5,8 +5,6 @@
 
 <?php
 
-
-
 session_start();
 
 $urun_id =$_POST['urun_id'];
@@ -34,15 +32,12 @@ if($urun_id && $kullanici_id &&isset($adet) && $adet > 0){
         if(!$sepet_kontrol)
         {
             $sepetekle = $db->query("INSERT INTO sepet (kullanici_id, urun_id, sepet_adet) VALUES ($kullanici_id, $urun_id, $adet)");
-            $_SESSION['favori_mesaj'] = "Ürün Sepetinize Eklendi"; 
-
-            $stoktan_dus =$db->query("UPDATE urunler SET adet = adet - $adet WHERE urun_id = $urun_id");      
+            $_SESSION['favori_mesaj'] = "Ürün Sepetinize Eklendi";    
         }
         else
         {
             $sepetekle = $db->query("UPDATE sepet SET sepet_adet = sepet_adet + $adet WHERE kullanici_id = $kullanici_id AND urun_id = $urun_id");
             $_SESSION['favori_mesaj'] = "Sepetteki Ürünün Adedi Arttırıldı!";
-            $stoktan_dus =$db->query("UPDATE urunler SET adet = adet - $adet WHERE urun_id = $urun_id");  
         }
     }  
 }
