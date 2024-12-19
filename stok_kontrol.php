@@ -18,11 +18,11 @@ if($_SESSION["tur"]=='admin')
     {
         echo "<table align='center' border='1'>
         <tr>
-            <td>Fotoğraf</td>
             <td>Ürün ID</td>
             <td>Serino</td>
-            <td>Adı</td>
+            <td>Ürün Adı</td>
             <td>Adet</td>
+            <td>Fotoğraf</td>
             <td>Stok Ekle</td>
             <td>Stok Azalt</td>
         </tr>";

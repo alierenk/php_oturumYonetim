@@ -32,7 +32,7 @@ if($urun_id && $kullanici_id &&isset($adet) && $adet > 0){
         if(!$sepet_kontrol)
         {
             $sepetekle = $db->query("INSERT INTO sepet (kullanici_id, urun_id, sepet_adet) VALUES ($kullanici_id, $urun_id, $adet)");
-            $_SESSION['favori_mesaj'] = "Ürün Sepetinize Eklendi";    
+            $_SESSION['favori_mesaj'] = "Ürün Sepetinize Eklendi";             
         }
         else
         {

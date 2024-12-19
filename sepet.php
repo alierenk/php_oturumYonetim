@@ -12,12 +12,16 @@
 session_start();
 
 $db = new PDO("mysql:host=localhost;dbname=ali_oturum",'root','');
+$urun_listele=$db->query("SELECT * FROM urunler");
+$list = $admin_listele->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {      //post gönderildiyse + ve - submitden
     $urun_id = $_POST['urun_id'];
-    $sepet_sayisi = $_POST['sepet_adet'];  
+    $sepet_sayisi = $_POST['sepet_adet'];
     $kullanici_id = $_SESSION['kullanici_id'];
-
+    
     if (isset($_POST['azalt']) && $sepet_sayisi > 1) {
         $sepet_sayisi--;  
     } elseif (isset($_POST['ekle'])) {
