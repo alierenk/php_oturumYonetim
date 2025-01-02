@@ -11,23 +11,43 @@
 
 session_start();
 
+if (isset($_SESSION['favori_red'])) {
+    echo "<div class='favori-red show'>" . $_SESSION['favori_red'] . "</div>";
+    unset($_SESSION['favori_red']);
+}
+
 $db = new PDO("mysql:host=localhost;dbname=ali_oturum",'root','');
 $urun_listele=$db->query("SELECT * FROM urunler");
-$list = $admin_listele->fetchAll(PDO::FETCH_ASSOC);
 
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {      //post gönderildiyse + ve - submitden
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $urun_id = $_POST['urun_id'];
     $sepet_sayisi = $_POST['sepet_adet'];
     $kullanici_id = $_SESSION['kullanici_id'];
-    
-    if (isset($_POST['azalt']) && $sepet_sayisi > 1) {
-        $sepet_sayisi--;  
-    } elseif (isset($_POST['ekle'])) {
-        $sepet_sayisi++;  
+
+    $urun_sorgu = $db->query("SELECT * FROM urunler WHERE urun_id = $urun_id");
+    $urun = $urun_sorgu->fetch(PDO::FETCH_ASSOC);
+
+    if ($urun) 
+    {
+        $stok_adet = $urun['adet'];
+        
+        // Artış yapılmadan önce stok kontrolü
+        if (isset($_POST['ekle'])) {
+            if ($sepet_sayisi < $stok_adet) {
+                $sepet_sayisi++;
+            } else {
+                $_SESSION['favori_red'] = "Stokta yeterli ürün bulunmamaktadır!";
+                header("Location: " . $_SERVER['PHP_SELF']); // Sayfayı yeniden yüklüyoruz
+                exit();
+            }
+        }
+        if (isset($_POST['azalt']) && $sepet_sayisi > 1) 
+        {
+            $sepet_sayisi--;
+        }   
+        $update_query = $db->query("UPDATE sepet SET sepet_adet = $sepet_sayisi WHERE urun_id = $urun_id AND kullanici_id = $kullanici_id");
     }
-    $update_query = $db->query("UPDATE sepet SET sepet_adet = $sepet_sayisi WHERE urun_id = $urun_id AND kullanici_id = $kullanici_id"); 
 }
 
 $kullanici_id =$_SESSION['kullanici_id'];
@@ -78,12 +98,16 @@ if (count($sepeturunler) > 0)
                 {$urun['fiyat']}
             </td>
             <td>
-                <form action='' method='POST'>
-                        <input type='submit' name='azalt' value='-'>
-                        <input type='number' name='sepet_adet' value='{$urun['sepet_adet']}' style='width:50px'>
-                        <input type='hidden' name='urun_id' value='{$urun['urun_id']}'>
-                        <input type='submit' name='ekle' value='+'>
-                </form>
+            <form action='' method='POST'>
+                <div style='display: flex; justify-content: center; align-items: center; gap: 4px;'>
+                    <input type='submit' name='azalt' value='-' style='width: 25px; height: 25px; cursor: pointer;'>
+                    <input type='number' name='sepet_adet' value='{$urun['sepet_adet']}' min='1' max='{$urun['adet']}'  style='width: 35px; height: 20px; text-align: center;'>
+        
+        
+                    <input type='submit' name='ekle' value='+' style='width: 25px; height: 25px; cursor: pointer;'>
+                </div>
+                    <input type='hidden' name='urun_id' value='{$urun['urun_id']}'>
+            </form>
             </td>
             <td>
             {$urun_toplam_tutar}

@@ -32,8 +32,7 @@ if($_SESSION["tur"]=='kullanici' || $_SESSION["tur"]=='admin')
     
     $db = new PDO("mysql:host=localhost;dbname=ali_oturum",'root','');
     $listele = $db-> query("SELECT * FROM urunler");
-    
-    echo "<h2 align='center'>Ürünler</h2>";
+
 
     while($row =$listele->fetch())
     {
@@ -63,7 +62,7 @@ if($_SESSION["tur"]=='kullanici' || $_SESSION["tur"]=='admin')
                         
                         <form action='sepeteEkle.php' method='POST' style='display: flex; align-items: center;'>
                             <input type='hidden' name='urun_id' value='$urun_id'>
-                            <input type='number' name='adet' class='quantity-input' min='1' value='1'>
+                            <input type='number' name='kullanici_adet' class='quantity-input' min='1' value='1' max='$urun_adet'>
                             <button type='submit' class='sepet-btn'>
                                 <img src='imgs/sepet.png' alt='Sepet'>
                             </button>
